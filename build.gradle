@@ -22,15 +22,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    // в тестах, вызывая `gradlew test -Dselenide.headless=true` будем передавать этот параметр в JVM (где его подтянет Selenide)
+    // свойство selenide.headless используется в проектах на основе Selenide для передачи значения параметра в JVM
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    systemProperty 'credentials.enableService', 'false'
-    systemProperty 'profile.passwordManagerEnabled', 'false'
-    systemProperty 'chrome.switches', '--password-store=basic'
-    systemProperty 'chrome.prefs',
-            '{"credentials_enable_service": false, "profile.password_manager_enabled": false, "profile.default_content_setting_values.popups": 0, "profile.default_content_setting_values.notifications": 2}'
-
-
-    systemProperty 'chrome.switches', '--disable-infobars'
-
-
+    // свойство chromeoptions.prefs используется для задания настроек браузера в проектах на основе Selenide, выключаем менеджер паролей
+    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
 }
