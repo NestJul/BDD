@@ -23,4 +23,14 @@ dependencies {
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'credentials.enableService', 'false'
+    systemProperty 'profile.passwordManagerEnabled', 'false'
+    systemProperty 'chrome.switches', '--password-store=basic'
+    systemProperty 'chrome.prefs',
+            '{"credentials_enable_service": false, "profile.password_manager_enabled": false, "profile.default_content_setting_values.popups": 0, "profile.default_content_setting_values.notifications": 2}'
+
+
+    systemProperty 'chrome.switches', '--disable-infobars'
+
+
 }
