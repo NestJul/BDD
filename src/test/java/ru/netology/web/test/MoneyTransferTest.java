@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.CardsPage;
 import ru.netology.web.page.LoginPage;
-import ru.netology.web.page.TransferMoneyPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -69,8 +68,8 @@ public class MoneyTransferTest {
         var mPage = cardsPage.transfer(destinCardIndex);
         mPage.transfer(amount, DataHelper.getFirstCardNumber().getNumber());
         mPage.getError();
-        Assertions.assertEquals(10_000, initBalanceFirst);
-        Assertions.assertEquals(10_000, initBalanceSecond);
+        Assertions.assertEquals(initBalanceFirst - amount, initBalanceFirst);
+        Assertions.assertEquals(initBalanceSecond + amount, initBalanceSecond);
     }
 
 }
